@@ -420,6 +420,8 @@ function moveCPU(side){
 var lastml = [];
 var clickedX = 0;
 var clickedY = 0;
+
+var cpuMode = "ver2";
 document.onclick = function(){
     //if(lastMoved == "w"){ return };
     //moveCPU();
@@ -450,7 +452,11 @@ document.onclick = function(){
         lastMoved = "w";
         
         setTimeout(function(){
-            moveCPU("b")
+            if(cpuMode == "ver2"){
+                moveCPU("b");
+            }else if(cpuMode == "ver1"){
+                moveCPUold1("b");
+            }
             lastmoved = "b";
         }, 500)
     }else{
@@ -520,6 +526,16 @@ function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return [evt.clientX - rect.left, evt.clientY - rect.top]
 }
+
+document.getElementById("cpuVer2").addEventListener("click", function(){
+    cpuMode = "ver2";
+    console.log("strong cpu");
+})
+
+document.getElementById("cpuVer1").addEventListener("click", function(){
+    cpuMode = "ver1";
+    console.log("weak cpu");
+})
 
 
 init();
